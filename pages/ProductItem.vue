@@ -1,11 +1,11 @@
 <script>
 import { defineComponent } from "vue";
-import WishListToggle from "~/components/WishListToggle.vue";
+import WishListToggler from "~/components/WishListToggler.vue";
 
 export default defineComponent({
   name: "ProductItem",
   props: ["product"],
-  components: { WishListToggle },
+  components: { WishListToggler },
 });
 </script>
 
@@ -13,7 +13,7 @@ export default defineComponent({
   <v-card>
     <v-card-title>
       {{ product.title }}
-      <wish-list-toggle :product="product" />
+      <wish-list-toggler :product="product" />
     </v-card-title>
     <v-card-subtitle>{{ $formatCurrency(product.price) }}</v-card-subtitle>
     <v-card-text>{{ product.description }}</v-card-text>
