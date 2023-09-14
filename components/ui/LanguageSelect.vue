@@ -7,7 +7,10 @@
     </template>
     <v-list>
       <v-list-item v-for="(item, index) in locales" :key="index">
-        <v-list-item-title @click="onLanguageSwitch(item.code)">
+        <v-list-item-title
+          @click="onLanguageSwitch(item.code)"
+          class="cursor-pointer"
+        >
           {{ item.text }}
         </v-list-item-title>
       </v-list-item>
@@ -17,6 +20,7 @@
 
 <script>
 export default {
+  name: "LanguageSelect",
   computed: {
     locales() {
       return this.$i18n.locales.map((locale) => ({
@@ -35,3 +39,8 @@ export default {
   },
 };
 </script>
+<style scoped>
+.cursor-pointer {
+  cursor: pointer;
+}
+</style>

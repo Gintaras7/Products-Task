@@ -1,56 +1,43 @@
 <script>
 import { defineComponent } from "vue";
-import ProductItem from "~/pages/ProductItem.vue";
-import { debounce } from "~/utils/debounce";
+import ProductItem from "~/components/ProductItem.vue";
+import SearchableInput from "@ui/SearchableInput.vue";
+import ProductsGrid from "../components/ProductsGrid.vue";
 
 export default defineComponent({
   name: "Products",
   components: {
     ProductItem,
+    SearchableInput,
+    ProductsGrid,
   },
   data() {
     return {
-      contentForSearch: "",
+      enteredSearchValue: "",
       searchForText: "",
-      debouncingFunction: debounce(
-        (pendingValue) => (this.searchForText = pendingValue)
-      ),
+      products: [],
     };
   },
+  mounted() {
+    this.products = this.$store.state.products;
+  },
   computed: {
-    products() {
-      const products = this.$store.state.products.filter(
-        ({ title, description }) =>
-          title.includes(this.searchForText) ||
-          description.includes(this.searchForText)
-      );
+    filteredProducts() {
+      return this.products.filter(({ title, description }) => {
+        if (title.indexOf(this.searchForText) > -1) {
+          return true;
+        }
 
-      const pageSize = 3;
-      const currentPage = this.$store.state.currentPage;
-
-      const startIndex = (currentPage - 1) * pageSize;
-      const endIndex = startIndex + pageSize;
-
-      return products.slice(startIndex, endIndex);
-    },
-    currentPage: {
-      get() {
-        return this.$store.state.currentPage;
-      },
-      set(value) {
-        this.$store.commit("SET_CURRENT_PAGE", value);
-      },
-    },
-    totalPages() {
-      return Math.ceil(this.$store.state.products.length / 3);
+        return description.indexOf(this.searchForText) > -1;
+      });
     },
   },
   methods: {
-    addProductToCart(product) {
-      this.$store.dispatch("addProductToCart", product);
+    initProductsFiltering(val) {
+      this.searchForText = val;
     },
-    changePage(value) {
-      this.currentPage = value;
+    onPageUpdate(itemsInPage) {
+      this.pageItems = itemsInPage;
     },
   },
 });
@@ -58,33 +45,12 @@ export default defineComponent({
 
 <template>
   <v-container>
-    <template>
-      <v-form>
-        <v-text-field
-          :placeholder="$t('product.searchFor')"
-          v-model="contentForSearch"
-          @input="debouncingFunction"
-          clearable
-          solo
-          prepend-inner-icon="mdi mdi-magnify"
-        />
-      </v-form>
-    </template>
-    <v-row>
-      <v-col
-        cols="12"
-        sm="6"
-        md="4"
-        v-for="product in products"
-        :key="product.id"
-      >
-        <ProductItem :product="product" @addToCart="addProductToCart" />
-      </v-col>
-    </v-row>
-    <v-pagination
-      v-model="currentPage"
-      :length="totalPages"
-      @input="changePage"
-    ></v-pagination>
+    <products-grid :products="products">
+      <searchable-input
+        :placeholder="$t('product.searchFor')"
+        v-model="enteredSearchValue"
+        @debounced="initProductsFiltering"
+      />
+    </products-grid>
   </v-container>
 </template>

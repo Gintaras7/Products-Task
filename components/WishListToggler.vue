@@ -10,6 +10,7 @@
 import { mapGetters } from "vuex";
 
 export default {
+  name: "WishListToggler",
   props: {
     product: {
       type: Object,

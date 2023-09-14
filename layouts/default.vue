@@ -40,7 +40,7 @@
       </v-container>
     </v-main>
     <v-navigation-drawer v-model="rightDrawer" right temporary fixed>
-      <CartDetails />
+      <cart-details />
     </v-navigation-drawer>
     <v-footer app>
       <span>&copy; {{ new Date().getFullYear() }}</span>
@@ -50,9 +50,11 @@
 
 <script>
 import { mapGetters } from "vuex";
+import LanguageSelect from "@ui/LanguageSelect.vue";
 
 export default {
   name: "DefaultLayout",
+  components: { LanguageSelect },
   data() {
     return {
       drawer: false,
@@ -61,7 +63,7 @@ export default {
     };
   },
   computed: {
-    ...mapGetters(["productsInCart"]),
+    ...mapGetters(["cartItemCount"]),
     items() {
       return [
         {
@@ -74,13 +76,12 @@ export default {
           title: this.$t("layout.products"),
           to: "/products",
         },
+        {
+          icon: "mdi-heart",
+          title: this.$t("layout.wishList"),
+          to: "/wishes",
+        },
       ];
-    },
-    cartItemCount() {
-      return this.productsInCart.reduce(
-        (total, item) => total + item.quantity,
-        0
-      );
     },
   },
   mounted() {
