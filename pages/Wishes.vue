@@ -7,10 +7,13 @@ export default defineComponent({
   components: {
     ProductsGrid,
   },
-  computed: {
-    wishedProductList() {
-      return this.$store.state.wishList.items;
-    },
+  data() {
+    return {
+      wishedProductList: [],
+    };
+  },
+  mounted() {
+    this.wishedProductList = this.$store.state.wishList.items;
   },
 });
 </script>

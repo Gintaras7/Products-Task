@@ -1,4 +1,5 @@
 import colors from "vuetify/es5/util/colors";
+import path from 'path';
 
 export default {
   // Disable server-side rendering: https://go.nuxtjs.dev/ssr-mode
@@ -72,5 +73,9 @@ export default {
   },
 
   // Build Configuration: https://go.nuxtjs.dev/config-build
-  build: {},
+  build: {
+    extend(config, ctx) {
+      config.resolve.alias['@ui'] = path.resolve(__dirname, 'components/ui');
+    },
+  },
 };

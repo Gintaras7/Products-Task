@@ -63,7 +63,7 @@ export default {
     };
   },
   computed: {
-    ...mapGetters(["productsInCart"]),
+    ...mapGetters(["cartItemCount"]),
     items() {
       return [
         {
@@ -82,12 +82,6 @@ export default {
           to: "/wishes",
         },
       ];
-    },
-    cartItemCount() {
-      return this.productsInCart.reduce(
-        (total, item) => total + item.quantity,
-        0
-      );
     },
   },
   mounted() {

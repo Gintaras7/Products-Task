@@ -15,11 +15,15 @@ export default defineComponent({
     return {
       enteredSearchValue: "",
       searchForText: "",
+      products: [],
     };
   },
+  mounted() {
+    this.products = this.$store.state.products;
+  },
   computed: {
-    products() {
-      return this.$store.state.products.filter(({ title, description }) => {
+    filteredProducts() {
+      return this.products.filter(({ title, description }) => {
         if (title.indexOf(this.searchForText) > -1) {
           return true;
         }

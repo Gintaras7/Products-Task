@@ -14,6 +14,12 @@ export const getters = {
     });
     return total;
   },
+  cartItemCount: (state) => {
+    return state.cart.reduce(
+      (total, item) => total + item.quantity,
+      0
+    );
+  },
   productsInCart: (state) => {
     return state.cart;
   },
@@ -100,6 +106,7 @@ export const actions = {
   async loadProducts({ commit }) {
     try {
       const products = await fetchProductsFromAPI(); // Using the previously mocked function
+      console.log("loadProducts", products)
       commit("SET_PRODUCTS", products);
     } catch (error) {
       console.error("An error occurred while fetching products:", error);

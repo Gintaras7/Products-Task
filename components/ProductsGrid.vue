@@ -2,6 +2,7 @@
 import { defineComponent } from "vue";
 import ProductItem from "~/components/ProductItem.vue";
 import Pagination from "@ui/Pagination.vue";
+
 export default defineComponent({
   props: {
     products: {
