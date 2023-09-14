@@ -11,7 +11,7 @@
       <tbody>
         <tr v-for="item in cartItems" :key="item.id">
           <td>{{ item.title }}</td>
-          <td>{{ item.price | currency }}</td>
+          <td>{{ $formatCurrency(item.price) }}</td>
           <td>
             <v-btn icon @click="incrementProductQuantity(item)">
               <v-icon>mdi-plus</v-icon>
@@ -26,7 +26,7 @@
         </tr>
         <tr>
           <td>Total:</td>
-          <td>{{ total | currency }}</td>
+          <td>{{ $formatCurrency(total) }}</td>
           <td>
             <v-btn @click="checkout">{{ $t("cart.add") }}</v-btn>
             <v-btn @click="clearCart">{{ $t("cart.clear") }}</v-btn>
@@ -48,11 +48,6 @@ export default defineComponent({
     },
     total() {
       return this.$store.getters.cartTotalPrice;
-    },
-  },
-  filters: {
-    currency(value) {
-      return `$${value.toFixed(2)}`;
     },
   },
   methods: {
