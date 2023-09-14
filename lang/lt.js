@@ -3,6 +3,7 @@ export default {
     title: "Pavadinimas",
     price: "Kaina",
     actions: "Veiksmai",
+    searchFor: "Ieškoti pagal pavadinimą arba aprašymą"
   },
   cart: {
     total: "Viso",

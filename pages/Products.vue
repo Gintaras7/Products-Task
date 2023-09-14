@@ -1,17 +1,32 @@
 <script>
 import { defineComponent } from "vue";
 import ProductItem from "~/pages/ProductItem.vue";
+import { debounce } from "~/utils/debounce";
 
 export default defineComponent({
   name: "Products",
   components: {
     ProductItem,
   },
+  data() {
+    return {
+      contentForSearch: "",
+      searchForText: "",
+      debouncingFunction: debounce(
+        (pendingValue) => (this.searchForText = pendingValue)
+      ),
+    };
+  },
   computed: {
     products() {
+      const products = this.$store.state.products.filter(
+        ({ title, description }) =>
+          title.includes(this.searchForText) ||
+          description.includes(this.searchForText)
+      );
+
       const pageSize = 3;
       const currentPage = this.$store.state.currentPage;
-      const products = this.$store.state.products;
 
       const startIndex = (currentPage - 1) * pageSize;
       const endIndex = startIndex + pageSize;
@@ -43,6 +58,18 @@ export default defineComponent({
 
 <template>
   <v-container>
+    <template>
+      <v-form>
+        <v-text-field
+          :placeholder="$t('product.searchFor')"
+          v-model="contentForSearch"
+          @input="debouncingFunction"
+          clearable
+          solo
+          prepend-inner-icon="mdi mdi-magnify"
+        />
+      </v-form>
+    </template>
     <v-row>
       <v-col
         cols="12"
