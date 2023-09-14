@@ -22,6 +22,7 @@
       <v-app-bar-nav-icon @click.stop="drawer = !drawer" />
       <v-toolbar-title>{{ title }}</v-toolbar-title>
       <v-spacer />
+      <language-select />
       <v-btn icon @click.stop="showCart">
         <v-badge
           :value="cartItemCount"
@@ -55,24 +56,26 @@ export default {
   data() {
     return {
       drawer: false,
-      items: [
-        {
-          icon: "mdi-home",
-          title: "Home",
-          to: "/",
-        },
-        {
-          icon: "mdi-view-dashboard",
-          title: "Products",
-          to: "/products",
-        },
-      ],
       rightDrawer: false,
       title: "Front-end task",
     };
   },
   computed: {
     ...mapGetters(["productsInCart"]),
+    items() {
+      return [
+        {
+          icon: "mdi-home",
+          title: this.$t("layout.home"),
+          to: "/",
+        },
+        {
+          icon: "mdi-view-dashboard",
+          title: this.$t("layout.products"),
+          to: "/products",
+        },
+      ];
+    },
     cartItemCount() {
       return this.productsInCart.reduce(
         (total, item) => total + item.quantity,

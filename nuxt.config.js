@@ -18,7 +18,6 @@ export default {
     ],
     link: [{ rel: "icon", type: "image/x-icon", href: "/favicon.ico" }],
   },
-
   // Global CSS: https://go.nuxtjs.dev/config-css
   css: [],
 
@@ -35,8 +34,22 @@ export default {
   ],
 
   // Modules: https://go.nuxtjs.dev/config-modules
-  modules: [],
+  modules: ["nuxt-i18n"],
 
+  i18n: {
+    defaultLocale: "lt",
+    lazy: true,
+    langDir: "lang/",
+    strategy: "no_prefix",
+
+    vueI18n: {
+      fallbackLocale: "en",
+    },
+    locales: [
+      { code: "lt", iso: "lt-LT", file: "lt.js" },
+      { code: "en", iso: "en-US", file: "en.js" },
+    ],
+  },
   // Vuetify module configuration: https://go.nuxtjs.dev/config-vuetify
   vuetify: {
     customVariables: ["~/assets/variables.scss"],
