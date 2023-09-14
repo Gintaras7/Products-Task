@@ -22,6 +22,7 @@
       <v-app-bar-nav-icon @click.stop="drawer = !drawer" />
       <v-toolbar-title>{{ title }}</v-toolbar-title>
       <v-spacer />
+      <language-select />
       <v-btn icon @click.stop="showCart">
         <v-badge
           :value="cartItemCount"

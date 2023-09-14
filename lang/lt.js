@@ -1,18 +1,17 @@
 export default {
   product: {
-    title: "Title",
-    price: "Price",
-    actions: "Actions",
+    title: "Pavadinimas",
+    price: "Kaina",
+    actions: "Veiksmai",
   },
-
   cart: {
-    total: "Total",
-    add: "Add to cart",
-    clear: "Clear cart",
-    view: "View cart"
+    total: "Viso",
+    add: "Į krepšelį",
+    clear: "Išvalyti",
+    view: "Peržiūrėti krepšelį"
   },
   layout: {
-    home: "Home",
-    products: "Products"
+    home: "Pagrindinis",
+    products: "Prekės"
   }
 };
