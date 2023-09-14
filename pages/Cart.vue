@@ -25,7 +25,7 @@
           </td>
         </tr>
         <tr>
-          <td>Total:</td>
+          <td>{{ $t("product.total") }}:</td>
           <td>{{ $formatCurrency(total) }}</td>
           <td>
             <v-btn @click="checkout">{{ $t("cart.add") }}</v-btn>

@@ -3,6 +3,7 @@ export default {
     title: "Title",
     price: "Price",
     actions: "Actions",
+    searchFor: "Search by title or description"
   },
 
   cart: {
