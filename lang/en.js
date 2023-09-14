@@ -3,7 +3,8 @@ export default {
     title: "Title",
     price: "Price",
     actions: "Actions",
-    searchFor: "Search by title or description"
+    searchFor: "Search by title or description",
+    total: "Total"
   },
 
   cart: {
@@ -14,6 +15,7 @@ export default {
   },
   layout: {
     home: "Home",
-    products: "Products"
+    products: "Products",
+    wishList: "Wishes"
   }
 };

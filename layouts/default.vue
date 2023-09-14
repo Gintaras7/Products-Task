@@ -50,9 +50,11 @@
 
 <script>
 import { mapGetters } from "vuex";
+import LanguageSelect from "@ui/LanguageSelect.vue";
 
 export default {
   name: "DefaultLayout",
+  components: { LanguageSelect },
   data() {
     return {
       drawer: false,
@@ -73,6 +75,11 @@ export default {
           icon: "mdi-view-dashboard",
           title: this.$t("layout.products"),
           to: "/products",
+        },
+        {
+          icon: "mdi-heart",
+          title: this.$t("layout.wishList"),
+          to: "/wishes",
         },
       ];
     },

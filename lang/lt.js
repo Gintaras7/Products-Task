@@ -3,7 +3,8 @@ export default {
     title: "Pavadinimas",
     price: "Kaina",
     actions: "Veiksmai",
-    searchFor: "Ieškoti pagal pavadinimą arba aprašymą"
+    searchFor: "Ieškoti pagal pavadinimą arba aprašymą",
+    total: "Viso"
   },
   cart: {
     total: "Viso",
@@ -13,6 +14,7 @@ export default {
   },
   layout: {
     home: "Pagrindinis",
-    products: "Prekės"
+    products: "Prekės",
+    wishList: "Norų sąrašas"
   }
 };

@@ -1,40 +1,39 @@
 <script>
 import { defineComponent } from "vue";
-import ProductItem from "~/pages/ProductItem.vue";
-import SearchableInput from "~/components/SearchableInput.vue";
+import ProductItem from "~/components/ProductItem.vue";
+import SearchableInput from "@ui/SearchableInput.vue";
+import ProductsGrid from "../components/ProductsGrid.vue";
 
 export default defineComponent({
   name: "Products",
   components: {
     ProductItem,
     SearchableInput,
+    ProductsGrid,
   },
   data() {
     return {
-      pageItems: [],
-      currentPage: 1,
       enteredSearchValue: "",
       searchForText: "",
     };
   },
   computed: {
     products() {
-      return this.$store.state.products.filter(
-        ({ title, description }) =>
-          title.includes(this.searchForText) ||
-          description.includes(this.searchForText)
-      );
+      return this.$store.state.products.filter(({ title, description }) => {
+        if (title.indexOf(this.searchForText) > -1) {
+          return true;
+        }
+
+        return description.indexOf(this.searchForText) > -1;
+      });
     },
   },
   methods: {
-    onSearch(val) {
+    initProductsFiltering(val) {
       this.searchForText = val;
     },
     onPageUpdate(itemsInPage) {
       this.pageItems = itemsInPage;
-    },
-    addProductToCart(product) {
-      this.$store.dispatch("addProductToCart", product);
     },
   },
 });
@@ -42,28 +41,12 @@ export default defineComponent({
 
 <template>
   <v-container>
-    <template>
+    <products-grid :products="products">
       <searchable-input
         :placeholder="$t('product.searchFor')"
         v-model="enteredSearchValue"
-        @debounced="onSearch"
+        @debounced="initProductsFiltering"
       />
-    </template>
-    <v-row>
-      <v-col
-        cols="12"
-        sm="6"
-        md="4"
-        v-for="product in pageItems"
-        :key="product.id"
-      >
-        <product-item :product="product" @addToCart="addProductToCart" />
-      </v-col>
-    </v-row>
-    <pagination
-      :items="products"
-      v-model="currentPage"
-      @page-changed="onPageUpdate"
-    />
+    </products-grid>
   </v-container>
 </template>
