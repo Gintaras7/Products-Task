@@ -11,7 +11,7 @@ export default defineComponent({
 
 <template>
   <v-card>
-    <v-card-title>
+    <v-card-title class="card-title">
       {{ product.title }}
       <wish-list-toggler :product="product" />
     </v-card-title>
@@ -24,3 +24,10 @@ export default defineComponent({
     </v-card-actions>
   </v-card>
 </template>
+<style scoped>
+.card-title {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+}
+</style>
