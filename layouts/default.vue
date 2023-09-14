@@ -40,7 +40,7 @@
       </v-container>
     </v-main>
     <v-navigation-drawer v-model="rightDrawer" right temporary fixed>
-      <CartDetails />
+      <cart-details />
     </v-navigation-drawer>
     <v-footer app>
       <span>&copy; {{ new Date().getFullYear() }}</span>
