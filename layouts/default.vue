@@ -55,7 +55,14 @@ export default {
   data() {
     return {
       drawer: false,
-      items: [
+      rightDrawer: false,
+      title: "Front-end task",
+    };
+  },
+  computed: {
+    ...mapGetters(["productsInCart"]),
+    items() {
+      return [
         {
           icon: "mdi-home",
           title: this.$t("layout.home"),
@@ -66,13 +73,8 @@ export default {
           title: this.$t("layout.products"),
           to: "/products",
         },
-      ],
-      rightDrawer: false,
-      title: "Front-end task",
-    };
-  },
-  computed: {
-    ...mapGetters(["productsInCart"]),
+      ];
+    },
     cartItemCount() {
       return this.productsInCart.reduce(
         (total, item) => total + item.quantity,
