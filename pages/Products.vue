@@ -1,22 +1,20 @@
 <script>
 import { defineComponent } from "vue";
 import ProductItem from "~/pages/ProductItem.vue";
-import { debounce } from "~/utils/debounce";
+import SearchableInput from "~/components/SearchableInput.vue";
 
 export default defineComponent({
   name: "Products",
   components: {
     ProductItem,
+    SearchableInput,
   },
   data() {
     return {
       pageItems: [],
       currentPage: 1,
-      contentForSearch: "",
+      enteredSearchValue: "",
       searchForText: "",
-      debouncingFunction: debounce(
-        (pendingValue) => (this.searchForText = pendingValue)
-      ),
     };
   },
   computed: {
@@ -29,6 +27,9 @@ export default defineComponent({
     },
   },
   methods: {
+    onSearch(val) {
+      this.searchForText = val;
+    },
     onPageUpdate(itemsInPage) {
       this.pageItems = itemsInPage;
     },
@@ -42,13 +43,10 @@ export default defineComponent({
 <template>
   <v-container>
     <template>
-      <v-text-field
+      <searchable-input
         :placeholder="$t('product.searchFor')"
-        v-model="contentForSearch"
-        @input="debouncingFunction"
-        clearable
-        solo
-        prepend-inner-icon="mdi mdi-magnify"
+        v-model="enteredSearchValue"
+        @debounced="onSearch"
       />
     </template>
     <v-row>
