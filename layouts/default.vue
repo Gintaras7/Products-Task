@@ -58,12 +58,12 @@ export default {
       items: [
         {
           icon: "mdi-home",
-          title: "Home",
+          title: this.$t("layout.home"),
           to: "/",
         },
         {
           icon: "mdi-view-dashboard",
-          title: "Products",
+          title: this.$t("layout.products"),
           to: "/products",
         },
       ],

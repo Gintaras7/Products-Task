@@ -26,7 +26,7 @@ export default defineComponent({
       </v-list-item>
     </v-list>
     <v-divider></v-divider>
-    <p>Total: {{ total }}</p>
-    <v-btn to="/cart" color="primary" depressed>View Cart</v-btn>
+    <p>{{ $t("cart.total") }}: {{ total }}</p>
+    <v-btn to="/cart" color="primary" depressed>{{ $t("cart.view") }}</v-btn>
   </div>
 </template>

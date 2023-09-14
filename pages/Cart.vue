@@ -3,9 +3,9 @@
     <template v-slot:default>
       <thead>
         <tr>
-          <th>Title</th>
-          <th>Price</th>
-          <th>Actions</th>
+          <th>{{ $t("product.title") }}</th>
+          <th>{{ $t("product.price") }}</th>
+          <th>{{ $t("product.actions") }}</th>
         </tr>
       </thead>
       <tbody>
@@ -28,8 +28,8 @@
           <td>Total:</td>
           <td>{{ total | currency }}</td>
           <td>
-            <v-btn @click="checkout">Checkout</v-btn>
-            <v-btn @click="clearCart">Clear Cart</v-btn>
+            <v-btn @click="checkout">{{ $t("cart.add") }}</v-btn>
+            <v-btn @click="clearCart">{{ $t("cart.clear") }}</v-btn>
           </td>
         </tr>
       </tbody>
