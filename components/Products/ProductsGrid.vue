@@ -1,16 +1,16 @@
 <script>
 import { defineComponent } from "vue";
-import ProductItem from "~/components/ProductItem.vue";
+import ProductItem from "~/components/products/ProductItem.vue";
 import Pagination from "@ui/Pagination.vue";
 
 export default defineComponent({
+  name: "ProductsGrid",
   props: {
     products: {
       type: Array,
       required: true,
     },
   },
-  name: "ProductsGrid",
   components: {
     ProductItem,
     Pagination,
@@ -45,11 +45,18 @@ export default defineComponent({
         v-for="product in pageItems"
         :key="product.id"
       >
-        <product-item :product="product" @addToCart="addProductToCart" />
+        <product-item :product="product" @addToCart="addProductToCart">
+          <template #actions>
+            <v-btn color="primary" @click="addProductToCart(product)">
+              {{ $t("cart.add") }}
+            </v-btn>
+          </template>
+        </product-item>
       </v-col>
     </v-row>
     <div class="d-flex justify-start ml-0 mt-4">
       <pagination
+        :show="products.length > 0"
         class="ml-n2"
         :items="products"
         v-model="currentPage"

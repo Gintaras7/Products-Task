@@ -1,0 +1,4 @@
+const WISH_ADD_TO_LIST_ACTION = "wishList/add";
+const WISH_REMOVE_FROM_LIST_ACTION = "wishList/remove";
+
+export { WISH_ADD_TO_LIST_ACTION, WISH_REMOVE_FROM_LIST_ACTION };

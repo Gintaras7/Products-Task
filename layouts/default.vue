@@ -1,29 +1,24 @@
 <template>
   <v-app>
-    <v-navigation-drawer v-model="drawer" fixed app>
-      <v-list>
-        <v-list-item
-          v-for="(item, i) in items"
-          :key="i"
-          :to="item.to"
-          router
-          exact
-        >
-          <v-list-item-action>
-            <v-icon>{{ item.icon }}</v-icon>
-          </v-list-item-action>
-          <v-list-item-content>
-            <v-list-item-title>{{ item.title }}</v-list-item-title>
-          </v-list-item-content>
-        </v-list-item>
-      </v-list>
-    </v-navigation-drawer>
+    <bottom-navigation
+      :navigation-links="navigationLinks"
+      v-if="isSmallScreen"
+    />
+    <top-navigation
+      v-model="isMainDrawerOpen"
+      :navigation-links="navigationLinks"
+      v-else
+    />
+
     <v-app-bar fixed app>
-      <v-app-bar-nav-icon @click.stop="drawer = !drawer" />
+      <v-app-bar-nav-icon
+        v-if="!isSmallScreen"
+        @click.stop="isMainDrawerOpen = !isMainDrawerOpen"
+      />
       <v-toolbar-title>{{ title }}</v-toolbar-title>
       <v-spacer />
-      <language-select />
-      <v-btn icon @click.stop="showCart">
+      <language-selector />
+      <v-btn icon @click.stop="showCartDrawer">
         <v-badge
           :value="cartItemCount"
           overlap
@@ -39,8 +34,14 @@
         <Nuxt />
       </v-container>
     </v-main>
-    <v-navigation-drawer v-model="rightDrawer" right temporary fixed>
-      <cart-details />
+    <v-navigation-drawer
+      v-model="isCartDrawerOpen"
+      :right="!isSmallScreen"
+      :bottom="isSmallScreen"
+      temporary
+      fixed
+    >
+      <cart-detailed-list />
     </v-navigation-drawer>
     <v-footer app>
       <span>&copy; {{ new Date().getFullYear() }}</span>
@@ -50,21 +51,32 @@
 
 <script>
 import { mapGetters } from "vuex";
-import LanguageSelect from "@ui/LanguageSelect.vue";
+import CartDetailedList from "~/components/cart/CartDetailedList.vue";
+import LanguageSelector from "@ui/LanguageSelector.vue";
+import TopNavigation from "@ui/Navigation/TopNavigation.vue";
+import BottomNavigation from "@ui/Navigation/BottomNavigation.vue";
 
 export default {
   name: "DefaultLayout",
-  components: { LanguageSelect },
+  components: {
+    LanguageSelector,
+    CartDetailedList,
+    TopNavigation,
+    BottomNavigation,
+  },
   data() {
     return {
-      drawer: false,
-      rightDrawer: false,
+      isMainDrawerOpen: false,
+      isCartDrawerOpen: false,
       title: "Front-end task",
     };
   },
   computed: {
     ...mapGetters(["cartItemCount"]),
-    items() {
+    isSmallScreen() {
+      return this.$vuetify.breakpoint.smAndDown;
+    },
+    navigationLinks() {
       return [
         {
           icon: "mdi-home",
@@ -87,10 +99,9 @@ export default {
   mounted() {
     this.$store.dispatch("loadProducts");
   },
-
   methods: {
-    showCart() {
-      this.rightDrawer = !this.rightDrawer;
+    showCartDrawer() {
+      this.isCartDrawerOpen = !this.isCartDrawerOpen;
     },
   },
 };

@@ -1,3 +1,36 @@
+<script>
+import { defineComponent } from "vue";
+
+export default defineComponent({
+  name: "Cart",
+  computed: {
+    cartItems() {
+      return this.$store.getters.productsInCart;
+    },
+    total() {
+      return this.$store.getters.cartTotalPrice;
+    },
+  },
+  methods: {
+    incrementProductQuantity(item) {
+      this.$store.dispatch("incrementProductQuantity", item);
+    },
+    decrementProductQuantity(item) {
+      this.$store.dispatch("decrementProductQuantity", item);
+    },
+    removeProductFromCart(item) {
+      this.$store.dispatch("removeProductFromCart", item);
+    },
+    checkout() {
+      this.$store.dispatch("checkout");
+    },
+    clearCart() {
+      this.$store.dispatch("clearCart");
+    },
+  },
+});
+</script>
+
 <template>
   <v-simple-table>
     <template v-slot:default>
@@ -36,36 +69,3 @@
     </template>
   </v-simple-table>
 </template>
-
-<script>
-import { defineComponent } from "vue";
-
-export default defineComponent({
-  name: "Cart",
-  computed: {
-    cartItems() {
-      return this.$store.getters.productsInCart;
-    },
-    total() {
-      return this.$store.getters.cartTotalPrice;
-    },
-  },
-  methods: {
-    incrementProductQuantity(item) {
-      this.$store.dispatch("incrementProductQuantity", item);
-    },
-    decrementProductQuantity(item) {
-      this.$store.dispatch("decrementProductQuantity", item);
-    },
-    removeProductFromCart(item) {
-      this.$store.dispatch("removeProductFromCart", item);
-    },
-    checkout() {
-      this.$store.dispatch("checkout");
-    },
-    clearCart() {
-      this.$store.dispatch("clearCart");
-    },
-  },
-});
-</script>

@@ -4,8 +4,13 @@ import WishListToggler from "~/components/WishListToggler.vue";
 
 export default defineComponent({
   name: "ProductItem",
-  props: ["product"],
   components: { WishListToggler },
+  props: {
+    product: {
+      type: Object,
+      required: true,
+    },
+  },
 });
 </script>
 
@@ -18,9 +23,7 @@ export default defineComponent({
     <v-card-subtitle>{{ $formatCurrency(product.price) }}</v-card-subtitle>
     <v-card-text>{{ product.description }}</v-card-text>
     <v-card-actions>
-      <v-btn color="primary" @click="$emit('addToCart', product)">{{
-        $t("cart.add")
-      }}</v-btn>
+      <slot name="actions"> </slot>
     </v-card-actions>
   </v-card>
 </template>

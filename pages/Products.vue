@@ -1,40 +1,35 @@
 <script>
 import { defineComponent } from "vue";
-import ProductItem from "~/components/ProductItem.vue";
+import ProductsGrid from "~/components/products/ProductsGrid.vue";
 import SearchableInput from "@ui/SearchableInput.vue";
-import ProductsGrid from "../components/ProductsGrid.vue";
+import { searchForValuesInObjects } from "~/utils/search-in-object";
 
 export default defineComponent({
   name: "Products",
   components: {
-    ProductItem,
     SearchableInput,
     ProductsGrid,
   },
   data() {
     return {
       enteredSearchValue: "",
-      searchForText: "",
-      products: [],
+      textToSearch: "",
     };
-  },
-  mounted() {
-    this.products = this.$store.state.products;
   },
   computed: {
     filteredProducts() {
-      return this.products.filter(({ title, description }) => {
-        if (title.indexOf(this.searchForText) > -1) {
-          return true;
-        }
+      const checkInFields = ["description", "title"];
 
-        return description.indexOf(this.searchForText) > -1;
-      });
+      return searchForValuesInObjects(
+        this.$store.state.products,
+        this.textToSearch,
+        checkInFields
+      );
     },
   },
   methods: {
     initProductsFiltering(val) {
-      this.searchForText = val;
+      this.textToSearch = val;
     },
     onPageUpdate(itemsInPage) {
       this.pageItems = itemsInPage;
@@ -45,7 +40,7 @@ export default defineComponent({
 
 <template>
   <v-container>
-    <products-grid :products="products">
+    <products-grid :products="filteredProducts">
       <searchable-input
         :placeholder="$t('product.searchFor')"
         v-model="enteredSearchValue"

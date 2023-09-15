@@ -23,7 +23,7 @@ export default defineComponent({
     };
   },
   mounted() {
-    this.currentPage = this.value;
+    this.changeToPage(this.value);
   },
   computed: {
     totalPages() {
@@ -32,9 +32,8 @@ export default defineComponent({
     itemsInPage() {
       const startIndex = (this.currentPage - 1) * this.pageSize;
       const endIndex = startIndex + this.pageSize;
-      const itemsOfSinglePage = [...this.items.slice(startIndex, endIndex)];
 
-      return itemsOfSinglePage;
+      return this.items.slice(startIndex, endIndex);
     },
   },
   methods: {

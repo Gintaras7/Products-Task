@@ -16,5 +16,8 @@ export default {
     home: "Pagrindinis",
     products: "Prekės",
     wishList: "Norų sąrašas"
+  },
+  wishes: {
+    noEntries: 'Norų nėra'
   }
 };
