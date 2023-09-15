@@ -3,7 +3,7 @@ import { mapGetters } from "vuex";
 import { defineComponent } from "vue";
 
 export default defineComponent({
-  name: "CartDetails",
+  name: "CartDetailedList",
   computed: {
     ...mapGetters(["productsInCart", "cartTotalPrice"]),
     cartItems() {

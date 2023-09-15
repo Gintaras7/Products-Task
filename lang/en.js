@@ -6,7 +6,6 @@ export default {
     searchFor: "Search by title or description",
     total: "Total"
   },
-
   cart: {
     total: "Total",
     add: "Add to cart",
@@ -17,5 +16,8 @@ export default {
     home: "Home",
     products: "Products",
     wishList: "Wishes"
+  },
+  wishes: {
+    noEntries: 'No wishes'
   }
 };

@@ -1,5 +1,12 @@
 # front-end-task
 
+## Run with Docker
+
+```bash
+
+docker-compose up --build
+```
+
 ## Build Setup
 
 ```bash

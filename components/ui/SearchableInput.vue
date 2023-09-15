@@ -21,7 +21,7 @@ export default defineComponent({
   data() {
     return {
       entered: "",
-      debounceFunction: debounce(this.onDebounceResult),
+      initDebounceFunction: debounce(this.onDebounceResult),
     };
   },
   mounted() {
@@ -30,7 +30,7 @@ export default defineComponent({
   methods: {
     onTextChanged(val) {
       this.$emit("input", val);
-      this.debounceFunction(val);
+      this.initDebounceFunction(val);
     },
     onDebounceResult(val) {
       this.$emit("debounced", val);

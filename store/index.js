@@ -12,13 +12,11 @@ export const getters = {
     state.cart.forEach((item) => {
       total += item.price * item.quantity;
     });
+
     return total;
   },
   cartItemCount: (state) => {
-    return state.cart.reduce(
-      (total, item) => total + item.quantity,
-      0
-    );
+    return state.cart.reduce((total, item) => total + item.quantity, 0);
   },
   productsInCart: (state) => {
     return state.cart;
@@ -113,10 +111,11 @@ export const actions = {
   },
   async checkout({ commit, state }) {
     try {
-    const success = await processCheckout(state.cart); // Define this function as per your process
-    if (success) {
-      commit("CLEAR_CART");
-    } }catch (error) {
+      const success = await processCheckout(state.cart); // Define this function as per your process
+      if (success) {
+        commit("CLEAR_CART");
+      }
+    } catch (error) {
       console.error("An error occurred during checkout process:", error);
     }
   },

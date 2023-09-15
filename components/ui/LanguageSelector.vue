@@ -20,7 +20,7 @@
 
 <script>
 export default {
-  name: "LanguageSelect",
+  name: "LanguageSelector",
   computed: {
     locales() {
       return this.$i18n.locales.map((locale) => ({
