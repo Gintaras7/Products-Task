@@ -1,6 +1,6 @@
 <script>
 import { defineComponent } from "vue";
-import ProductItem from "~/components/products/ProductItem.vue";
+import ProductItem from "~/components/Products/ProductItem.vue";
 import Pagination from "@ui/Pagination.vue";
 
 export default defineComponent({

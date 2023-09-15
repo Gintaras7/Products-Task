@@ -25,7 +25,7 @@ export default defineComponent({
         </v-list-item-content>
       </v-list-item>
     </v-list>
-    <v-divider></v-divider>
+    <v-divider />
     <div class="pl-4 pt-3">
       <p>{{ $t("cart.total") }}: {{ total }}</p>
       <v-btn to="/cart" color="primary" depressed>{{ $t("cart.view") }}</v-btn>

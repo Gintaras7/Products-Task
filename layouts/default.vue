@@ -51,7 +51,7 @@
 
 <script>
 import { mapGetters } from "vuex";
-import CartDetailedList from "~/components/cart/CartDetailedList.vue";
+import CartDetailedList from "~/components/Cart/CartDetailedList.vue";
 import LanguageSelector from "@ui/LanguageSelector.vue";
 import TopNavigation from "@ui/Navigation/TopNavigation.vue";
 import BottomNavigation from "@ui/Navigation/BottomNavigation.vue";

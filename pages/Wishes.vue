@@ -1,6 +1,6 @@
 <script>
 import { defineComponent } from "vue";
-import ProductsGrid from "~/components/products/ProductsGrid.vue";
+import ProductsGrid from "~/components/Products/ProductsGrid.vue";
 
 export default defineComponent({
   name: "Wishes",
