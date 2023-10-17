@@ -3,7 +3,7 @@
 ##
 
 This is code refactoring task from a given code.
-The code still has many places that can be improved (store, debounce hook, components, "lang" json files, lazy loading, auto imports...)
+The code still has many places that can be improved (store, debouncing, components, "lang" json files, lazy loading, auto imports...)
 
 ## Run with Docker
 
