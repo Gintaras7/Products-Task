@@ -1,8 +1,8 @@
-import { WISH_LIST_GETTER } from "../constants/store/getter-types";
+import { WISH_LIST_GETTER } from "~/store/constants/getter-types";
 import {
   ADD_TO_WISH_LIST,
   REMOVE_FROM_WISH_LIST,
-} from "../constants/store/mutation-types";
+} from "~/store/constants/mutation-types";
 
 export const state = () => ({
   items: [],

@@ -1,8 +1,8 @@
 <script>
 import { defineComponent } from "vue";
 import ProductsGrid from "~/components/Products/ProductsGrid.vue";
-import SearchableInput from "@ui/SearchableInput.vue";
-import { searchForValuesInObjects } from "~/utils/search-in-object";
+import SearchableInput from "@ui/Inputs/SearchableInput.vue";
+import { searchForValuesInObjects } from "@utils/search-in-object";
 
 export default defineComponent({
   name: "Products",
@@ -14,16 +14,15 @@ export default defineComponent({
     return {
       enteredSearchValue: "",
       textToSearch: "",
+      filterableFields: ["description", "title"],
     };
   },
   computed: {
     filteredProducts() {
-      const checkInFields = ["description", "title"];
-
       return searchForValuesInObjects(
         this.$store.state.products,
         this.textToSearch,
-        checkInFields
+        this.filterableFields
       );
     },
   },

@@ -1,10 +1,10 @@
 FROM node:18-alpine as builder
 
 WORKDIR /app
-COPY package.json package-lock.json ./
+COPY . .
 
 RUN npm install
-COPY . .
+
 EXPOSE 3000
 
 ENV NUXT_HOST=0.0.0.0

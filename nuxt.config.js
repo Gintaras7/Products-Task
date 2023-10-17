@@ -1,5 +1,5 @@
 import colors from "vuetify/es5/util/colors";
-import path from 'path';
+import path from "path";
 
 export default {
   // Disable server-side rendering: https://go.nuxtjs.dev/ssr-mode
@@ -23,9 +23,7 @@ export default {
   css: [],
 
   // Plugins to run before rendering page: https://go.nuxtjs.dev/config-plugins
-  plugins: [
-    './plugins/currency-plugin.js',
-  ],
+  plugins: ["./plugins/currency-plugin.js"],
 
   // Auto import components: https://go.nuxtjs.dev/config-components
   components: true,
@@ -75,7 +73,9 @@ export default {
   // Build Configuration: https://go.nuxtjs.dev/config-build
   build: {
     extend(config, ctx) {
-      config.resolve.alias['@ui'] = path.resolve(__dirname, 'components/ui');
+      config.resolve.alias["@ui"] = path.resolve(__dirname, "components/ui");
+      config.resolve.alias["@mixins"] = path.resolve(__dirname, "tools/mixins");
+      config.resolve.alias["@utils"] = path.resolve(__dirname, "tools/utils");
     },
   },
 };

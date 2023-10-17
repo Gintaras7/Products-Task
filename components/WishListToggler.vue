@@ -1,10 +1,10 @@
 <script>
 import { mapGetters } from "vuex";
-import { WISH_LIST_GETTER } from "~/constants/store/getter-types";
+import { WISH_LIST_GETTER } from "~/store/constants/getter-types";
 import {
   WISH_ADD_TO_LIST_ACTION,
   WISH_REMOVE_FROM_LIST_ACTION,
-} from "../constants/store/action-types";
+} from "~/store/constants/action-types";
 
 export default {
   name: "WishListToggler",

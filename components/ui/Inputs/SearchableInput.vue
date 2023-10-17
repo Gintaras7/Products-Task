@@ -1,6 +1,6 @@
 <script>
 import { defineComponent } from "vue";
-import { debounce } from "~/utils/debounce";
+import { debounce } from "@utils/debounce";
 
 export default defineComponent({
   name: "SearchableInput",

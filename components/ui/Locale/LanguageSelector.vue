@@ -23,9 +23,9 @@ export default {
   name: "LanguageSelector",
   computed: {
     locales() {
-      return this.$i18n.locales.map((locale) => ({
-        code: locale.code,
-        text: locale.code.toUpperCase(),
+      return this.$i18n.locales.map(({ code }) => ({
+        code,
+        text: code.toUpperCase(),
       }));
     },
     currentLocale() {

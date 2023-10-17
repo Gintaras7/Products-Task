@@ -1,9 +1,6 @@
 <template>
   <v-app>
-    <bottom-navigation
-      :navigation-links="navigationLinks"
-      v-if="isSmallScreen"
-    />
+    <bottom-navigation :navigation-links="navigationLinks" v-if="isMobile" />
     <top-navigation
       v-model="isMainDrawerOpen"
       :navigation-links="navigationLinks"
@@ -12,7 +9,7 @@
 
     <v-app-bar fixed app>
       <v-app-bar-nav-icon
-        v-if="!isSmallScreen"
+        v-if="!isMobile"
         @click.stop="isMainDrawerOpen = !isMainDrawerOpen"
       />
       <v-toolbar-title>{{ title }}</v-toolbar-title>
@@ -36,8 +33,8 @@
     </v-main>
     <v-navigation-drawer
       v-model="isCartDrawerOpen"
-      :right="!isSmallScreen"
-      :bottom="isSmallScreen"
+      :right="!isMobile"
+      :bottom="isMobile"
       temporary
       fixed
     >
@@ -52,9 +49,10 @@
 <script>
 import { mapGetters } from "vuex";
 import CartDetailedList from "~/components/Cart/CartDetailedList.vue";
-import LanguageSelector from "@ui/LanguageSelector.vue";
+import LanguageSelector from "@ui/Locale/LanguageSelector.vue";
 import TopNavigation from "@ui/Navigation/TopNavigation.vue";
 import BottomNavigation from "@ui/Navigation/BottomNavigation.vue";
+import screenMixin from "@mixins/screenMixin";
 
 export default {
   name: "DefaultLayout",
@@ -64,6 +62,7 @@ export default {
     TopNavigation,
     BottomNavigation,
   },
+  mixins: [screenMixin],
   data() {
     return {
       isMainDrawerOpen: false,
@@ -73,9 +72,6 @@ export default {
   },
   computed: {
     ...mapGetters(["cartItemCount"]),
-    isSmallScreen() {
-      return this.$vuetify.breakpoint.smAndDown;
-    },
     navigationLinks() {
       return [
         {
